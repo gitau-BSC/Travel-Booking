@@ -1,0 +1,163 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2024-06-15T10:00:00Z",
+  "schedules": [
+    {
+      "id": "SCH065",
+      "operator": {},
+      "route": {},
+      "timing": {},
+      "bus": {},
+      "fares": [],
+      "status": "Scheduled",
+
+
+      "seat_map": {
+        "layout": "2x2", 
+        "rows": 11,      
+        "seats": [
+          
+          {
+            "number": "1A",   
+            "class": "First", 
+            "row": 1,
+            "column": "A",
+            "position": "window", 
+            "is_available": false, 
+            "fare_reference": "First" 
+          },
+          {
+            "number": "1B",
+            "class": "First",
+            "row": 1,
+            "column": "B",
+            "position": "aisle",
+            "is_available": true,
+            "fare_reference": "First"
+          },
+          {
+            "number": "1C",
+            "class": "First",
+            "row": 1,
+            "column": "C",
+            "position": "aisle",
+            "is_available": true,
+            "fare_reference": "First"
+          },
+          {
+            "number": "1D",
+            "class": "First",
+            "row": 1,
+            "column": "D",
+            "position": "window",
+            "is_available": true,
+            "fare_reference": "First"
+          },
+          {
+            "number": "2A",
+            "class": "Business",
+            "row": 2,
+            "column": "A",
+            "position": "window",
+            "is_available": true,
+            "fare_reference": "Business"
+          },
+
+          {
+            "number": "11C",
+            "class": "Economy",
+            "row": 11,
+            "column": "C",
+            "position": "aisle",
+            "is_available": false,
+            "fare_reference": "Economy"
+          },
+          {
+            "number": "11D",
+            "class": "Economy",
+            "row": 11,
+            "column": "D",
+            "position": "window",
+            "is_available": true,
+            "fare_reference": "Economy"
+          }
+        ]
+      }
+    },
+  
+    {
+      "id": "SCH066",
+      "operator": {},
+      "route": {},
+      "timing": {},
+      "bus": {},
+      "fares": [],
+      
+      "status": "Scheduled",
+
+      
+      "seat_map": {
+        "layout": "2x2", 
+        "rows": 11,      
+        "seats": [
+          
+          {
+            "number": "1A",   
+            "class": "First", 
+            "row": 1,
+            "column": "A",
+            "position": "window", 
+            "is_available": true, 
+            "fare_reference": "First" 
+          },
+          {
+            "number": "1B",
+            "class": "First",
+            "row": 1,
+            "column": "B",
+            "position": "aisle",
+            "is_available": true,
+            "fare_reference": "First"
+          },
+          {
+            "number": "1C",
+            "class": "First",
+            "row": 1,
+            "column": "C",
+            "position": "aisle",
+            "is_available": false,
+            "fare_reference": "First"
+          },
+          {
+            "number": "1D",
+            "class": "First",
+            "row": 1,
+            "column": "D",
+            "position": "window",
+            "is_available": true,
+            "fare_reference": "First"
+          },
+          {
+            "number": "2A",
+            "class": "Business",
+            "row": 2,
+            "column": "A",
+            "position": "window",
+            "is_available": true,
+            "fare_reference": "Business"
+          },
+
+          {
+            "number": "11C",
+            "class": "Economy",
+            "row": 11,
+            "column": "C",
+            "position": "aisle",
+            "is_available": false,
+            "fare_reference": "Economy"
+          }
+        ]
+      }
+    }
+  ]
+}

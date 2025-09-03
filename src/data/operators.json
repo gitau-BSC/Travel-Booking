@@ -1,0 +1,40 @@
+{
+  "operators": [
+    {
+      "id": "OP003",
+      "name": "Dreamer Express",
+      "logo": "/logos/dreamer-express.png",
+      "description": "Premium luxury bus service with exceptional comfort and service",
+      "fleet_size": 25,
+      "year_established": 2015,
+      "safety_rating": 4.8,
+      "amenities": ["WiFi", "Air Conditioning", "Charging Ports", "Onboard Entertainment", "Refreshments"],
+      "contact": {
+        "phone": "+254-700-123-456",
+        "email": "info@dreamerexpress.com",
+        "website": "https://www.dreamerexpress.com",
+        "address": "P.O. Box 12345, Nairobi, Kenya"
+      },
+      "routes": ["RT001", "RT002", "RT003"],
+      "popular_routes": ["Nairobi-Mombasa", "Nairobi-Kisumu", "Nairobi-Eldoret"]
+    },
+    {
+      "id": "OP004",
+      "name": "Swift Travels",
+      "logo": "/logos/swift-travels.png",
+      "description": "Reliable and affordable bus service across Kenya",
+      "fleet_size": 35,
+      "year_established": 2010,
+      "safety_rating": 4.5,
+      "amenities": ["Air Conditioning", "Charging Ports"],
+      "contact": {
+        "phone": "+254-711-987-654",
+        "email": "bookings@swifttravels.co.ke",
+        "website": "https://www.swifttravels.co.ke",
+        "address": "P.O. Box 56789, Nairobi, Kenya"
+      },
+      "routes": ["RT001", "RT004", "RT005"],
+      "popular_routes": ["Nairobi-Mombasa", "Nairobi-Nakuru", "Nairobi-Thika"]
+    }
+  ]
+}

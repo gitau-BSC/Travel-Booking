@@ -1,0 +1,45 @@
+{
+  "cities": [
+    {
+      "id": "C001",
+      "name": "Nairobi",
+      "country": "Kenya",
+      "timezone": "Africa/Nairobi",
+      "bus_terminals": [
+        {
+          "name": "Nairobi Central Bus Station",
+          "location": "Latitude: -1.2921, Longitude: 36.8219",
+          "facilities": ["Waiting Area", "Restrooms", "Food Court", "ATM", "Ticket Counters"]
+        }
+      ],
+      "popular_destinations": ["Mombasa", "Kisumu", "Nakuru", "Eldoret"]
+    },
+    {
+      "id": "C002",
+      "name": "Mombasa",
+      "country": "Kenya",
+      "timezone": "Africa/Nairobi",
+      "bus_terminals": [
+        {
+          "name": "Mombasa Central Bus Park",
+          "location": "Latitude: -4.0435, Longitude: 39.6682",
+          "facilities": ["Waiting Area", "Restrooms", "Food Stalls", "Taxi Stand"]
+        }
+      ],
+      "popular_destinations": ["Nairobi", "Malindi", "Lamu", "Diani"]
+    },
+    {
+      "id": "C003",
+      "name": "Emali",
+      "country": "Kenya",
+      "timezone": "Africa/Nairobi",
+      "bus_stops": [
+        {
+          "name": "Emali Bus Stop",
+          "location": "Latitude: -2.2833, Longitude: 37.5167",
+          "facilities": ["Waiting Shelter", "Small Shop"]
+        }
+      ]
+    }
+  ]
+}

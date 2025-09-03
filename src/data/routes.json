@@ -1,0 +1,18 @@
+{
+  "routes": [
+    {
+      "id": "RT001",
+      "name": "Nairobi-Mombasa Highway",
+      "origin": "Nairobi",
+      "destination": "Mombasa",
+      "total_distance_km": 485,
+      "estimated_duration_minutes": 330,
+      "popular": true,
+      "scenic_route": false,
+      "major_stops": ["Nairobi", "Athi River", "Emali", "Mtito Andei", "Voi", "Mombasa"],
+      "operators": ["OP003", "OP004"],
+      "departure_times": ["08:00", "09:00", "10:00", "14:00", "22:00"],
+      "route_description": "The main highway connecting Kenya's capital Nairobi with the coastal city of Mombasa. This route passes through Tsavo National Park and offers views of wildlife."
+    }
+  ]
+}
