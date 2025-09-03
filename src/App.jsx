@@ -13,7 +13,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const location = useLocation();
 
-  // Scroll 
+  // Scroll to route page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
