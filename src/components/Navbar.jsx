@@ -8,28 +8,26 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Results", path: "/results" },
-    { name: "Cart", path: "/cart" },
-    { name: "Checkout", path: "/checkout" },
+    { name: "About Us", path: "/about" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   return (
     <>
       {/* Navbar */}
-      <nav className="flex items-center justify-between p-5 sticky top-0 bg-white z-50 shadow-md">
+      <nav className="flex items-center justify-between p-5 sticky top-0 bg-white z-50 shadow-md w-full">
         {/* Logo */}
         <NavLink
           to="/"
           className="flex items-center text-2xl font-bold"
           onClick={() => setToggle(false)}
         >
-          {/* Added a fallback in case the image doesn't load */}
-          <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white">
+          <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white">
             TL
           </div>
           <span className="ml-2">
             <span className="text-black">Travel</span>
-            <span className="text-cyan-500">Lite</span>
+            <span className="text-blue-600">Lite</span>
           </span>
         </NavLink>
 
@@ -43,7 +41,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `px-4 py-2 rounded-full transition ${
                   isActive
-                    ? "bg-cyan-100 text-cyan-600 font-semibold"
+                    ? "bg-blue-100 text-blue-600 font-semibold"
                     : "hover:bg-gray-100 text-gray-700"
                 }`
               }
@@ -83,7 +81,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `block py-3 px-4 rounded-lg mb-1 cursor-pointer transition ${
                     isActive
-                      ? "bg-cyan-100 text-cyan-600 font-semibold"
+                      ? "bg-blue-100 text-blue-600 font-semibold"
                       : "text-gray-700 hover:bg-gray-100"
                   }`
                 }
