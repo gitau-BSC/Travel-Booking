@@ -1,6 +1,6 @@
-import { LoadingSpinner, Services, TopSearch } from "../components";
 import { useState, lazy, Suspense, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { LoadingSpinner, Services, TopSearch } from "../components";
 
 const LazyTestimonials = lazy(() => import('../components/Testimonials'));
 
@@ -13,9 +13,8 @@ const Home = ({ onSearch }) => {
   const [toCity, setToCity] = useState('Mombasa');
   const [departureDate, setDepartureDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
-  const [passengers, setPassengers] = useState(1);
-  const [transportType, setTransportType] = useState('all');
   const [dateError, setDateError] = useState('');
+  const [loadingTripId, setLoadingTripId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -102,9 +101,8 @@ const Home = ({ onSearch }) => {
   // Filtering Trips - Search Filters
   const filteredTrips = searchFilters.fromCity 
     ? popularTrips.filter(trip => 
-        trip.from.includes(searchFilters.fromCity) &&
-        trip.to.includes(searchFilters.toCity) &&
-        (searchFilters.transportType === 'all' || trip.transport === searchFilters.transportType)
+        trip.from.toLowerCase().includes(searchFilters.fromCity.toLowerCase()) &&
+        trip.to.toLowerCase().includes(searchFilters.toCity.toLowerCase())
       )
     : popularTrips;
 
@@ -122,26 +120,32 @@ const Home = ({ onSearch }) => {
     return true;
   };
 
-  // Function to handle trip selection and redirect
+  // Function to handle trip selection and redirect to booking page
   const handleSelectTrip = (trip) => {
-    setIsSearching(true);
+    setLoadingTripId(trip.id);
     
-    // Prepare trip data for the bus list page
+    // trip data for the booking page
     const tripData = {
+      id: trip.id,
       fromCity: trip.from,
       toCity: trip.to,
-      departureDate: departureDate,
+      departureTime: trip.departure,
+      arrivalTime: trip.arrival,
+      duration: trip.duration,
+      price: trip.price,
       transportType: trip.transport,
-      company: trip.company
+      company: trip.company,
+      amenities: trip.amenities,
+      departureDate: departureDate
     };
     
-    // Store trip data for the bus list page
-    sessionStorage.setItem('tripData', JSON.stringify(tripData));
+    // Storage for trip data - booking page
+    sessionStorage.setItem('selectedTrip', JSON.stringify(tripData));
     
-    // Navigate after a short delay to show loading state
+    // Navigation to booking page after delay to show loading state
     setTimeout(() => {
-      setIsSearching(false);
-      navigate('/bus-list');
+      setLoadingTripId(null);
+      navigate('/booking', { state: { trip: tripData }});
     }, 1000);
   };
 
@@ -154,30 +158,27 @@ const Home = ({ onSearch }) => {
     
     setIsSearching(true);
     
-    // Prepare search data
+    // search data
     const searchData = {
       fromCity,
       toCity,
       departureDate: departureDate,
       returnDate: tripType === 'return' ? returnDate : null,
-      passengers,
-      transportType,
       tripType
     };
     
-    // Pass search data to parent component (App.jsx)
+    // Pass search data to parent
     if (onSearch) {
       onSearch(searchData);
     }
     
-    // Store search data for results page
+    // Storage for search data - results page
     sessionStorage.setItem('searchData', JSON.stringify(searchData));
     
-    // Set search filters to show results
+    // search filters to show results
     setSearchFilters({
       fromCity,
-      toCity,
-      transportType
+      toCity
     });
     
     // Reset searching state after a delay
@@ -214,7 +215,7 @@ const Home = ({ onSearch }) => {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <header className="bg-gradient-to-br from-blue-700 to-blue-900 text-white pb-12 pt-6">
+      <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white pb-12 pt-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -254,7 +255,8 @@ const Home = ({ onSearch }) => {
               <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-gray-800 mb-2">From</label>
                 <select
-                  className="w-full p-3 text-gray-800 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="w-full p-3 text-gray-800 border border-gray-300 rounded-lg
+                   bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                   value={fromCity}
                   onChange={(e) => setFromCity(e.target.value)}
                   required
@@ -309,7 +311,9 @@ const Home = ({ onSearch }) => {
                 <button 
                   type="submit"
                   disabled={isSearching}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 
+                  text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 
+                  transition-all shadow-md hover:shadow-lg font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isSearching ? 'Searching...' : 'Search'}
                 </button>
@@ -321,40 +325,11 @@ const Home = ({ onSearch }) => {
                 {dateError}
               </div>
             )}
-            
-            <div className="flex flex-wrap items-center gap-6">
-              <div className="flex items-center">
-                <label className="text-sm font-semibold text-gray-800 mr-3">Transport:</label>
-                <select 
-                  className="border border-gray-300 text-gray-800 rounded-lg p-2 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                  value={transportType}
-                  onChange={(e) => setTransportType(e.target.value)}
-                >
-                  <option value="all">All</option>
-                  <option value="bus">Buses</option>
-                  <option value="train">Trains</option>
-                  <option value="flight">Flights</option>
-                </select>
-              </div>
-              
-              <div className="flex items-center">
-                <label className="text-sm font-semibold text-gray-800 mr-3">Passengers:</label>
-                <select 
-                  className="border border-gray-300  text-gray-800 rounded-lg p-2 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                  value={passengers}
-                  onChange={(e) => setPassengers(parseInt(e.target.value))}
-                >
-                  {[1, 2, 3, 4, 5, 6].map(num => (
-                    <option key={num} value={num}>{num}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
           </div>
         </div>
-      </header>
-
-      {/* Available Trips Section - popular trips when no search has been made */}
+      </div>
+     
+      {/* Available Trips Section - popular trips - no search made */}
       {!searchFilters.fromCity && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex justify-between items-center mb-8">
@@ -400,11 +375,23 @@ const Home = ({ onSearch }) => {
                   </div>
                   
                   <button 
-                    className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                     onClick={() => handleSelectTrip(trip)}
-                    disabled={isSearching}
+                    disabled={loadingTripId === trip.id}
+                    className={`w-full py-2.5 rounded-lg font-medium transition-colors ${
+                      loadingTripId === trip.id 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                    }`}
                   >
-                    {isSearching ? 'Loading...' : 'Select This Trip'}
+                    {loadingTripId === trip.id ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Loading...
+                      </div>
+                    ) : 'Book Now'}
                   </button>
                 </div>
               </div>
@@ -476,23 +463,28 @@ const Home = ({ onSearch }) => {
                         <button 
                           className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                           onClick={() => handleSelectTrip(trip)}
+                          disabled={isSearching}
                         >
-                          Book Now
+                          {isSearching ? 'Loading...' : 'Book Now'}
                         </button>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12 bg-white rounded-lg shadow">
-                  <div className="text-5xl mb-4"></div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">No trips found</h3>
-                  <p className="text-gray-600">Try adjusting your search criteria</p>
-                  <button 
-                    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                <div className="text-center py-12 bg-white rounded-xl shadow-md">
+                  <div className="text-gray-500 mb-4">
+                    <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">No trips found</h3>
+                  <p className="text-gray-500 mb-4">We couldn't find any trips matching your search criteria.</p>
+                  <button
                     onClick={() => setSearchFilters({})}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                   >
-                    Start New Search
+                    Try a different search
                   </button>
                 </div>
               )}
@@ -501,16 +493,11 @@ const Home = ({ onSearch }) => {
         </section>
       )}
 
-     {/* Services Section */}
+      {/* Services Section */}
       <section aria-labelledby="services-heading" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white">
         <Services />
       </section>
-
-      {/* Top Search Section */}
-      <section aria-labelledby="top-search-heading" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <TopSearch onSelectDestination={(destination) => setToCity(destination)} />
-      </section>
-
+   
       {/* Testimonials */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Suspense fallback={

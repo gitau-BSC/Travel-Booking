@@ -87,9 +87,9 @@ const BookingList = ({ bookings }) => {
   const displayBookings = bookings && bookings.length > 0 ? bookings : sampleBookings;
 
   const handleSelectTrip = (booking) => {
-    // Store the selected booking in the store
+    // Storage for selected booking 
     selectSchedule(booking);
-    // Navigate to the seat selection page
+    // Navigation to seat selection
     navigate('/seats');
   };
 
