@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { LoadingSpinner, Services, TopSearch } from "../components";
+import { useNavigate } from "react-router-dom";
+import { LoadingSpinner, Services } from "../components";
 
 const LazyTestimonials = lazy(() => import('../components/Testimonials'));
 
@@ -14,15 +14,17 @@ const Home = ({ onSearch }) => {
   const [departureDate, setDepartureDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
   const [dateError, setDateError] = useState('');
-  const [loadingTripId, setLoadingTripId] = useState(null);
+ const [loadingTripId, setLoadingTripId] = useState(null);
 
   const navigate = useNavigate();
 
+  // Cities data
   const Cities = [
     "Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret", "Thika", "Malindi", "Kitale", 
     "Garissa", "Kakamega", "Nyeri", "Machakos", "Meru", "Lamu", "Voi", "Naivasha", "Nanyuki", "Embu"
   ];
 
+  // Trip data 
   const popularTrips = [
     {
       id: 1,
@@ -366,41 +368,35 @@ const Home = ({ onSearch }) => {
                     </div>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {trip.amenities.map((amenity, index) => (
-                      <span key={index} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md">
-                        {amenity}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <button 
-                    onClick={() => handleSelectTrip(trip)}
-                    disabled={loadingTripId === trip.id}
-                    className={`w-full py-2.5 rounded-lg font-medium transition-colors ${
-                      loadingTripId === trip.id 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-blue-600 text-white hover:bg-blue-700'
-                    }`}
-                  >
-                    {loadingTripId === trip.id ? (
-                      <div className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Loading...
-                      </div>
-                    ) : 'Book Now'}
-                  </button>
                 </div>
-              </div>
+                
+                <button 
+                  onClick={() =>handleSelectTrip(trip)} 
+                  disabled={loadingTripId === trip.id}
+                  className={`w-full py-2.5 rounded-lg font-medium transition-col
+                  ors flex items-center justify-center ${
+                    loadingTripId === trip.id
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}
+                >
+                  {loadingTripId === trip.id ? (
+                    <div className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Loading...
+                    </div>
+                  ) : 'Book Now'}
+                </button>
+            </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* Show search results when a search has been made */}
+      {/* Show search results */}
       {searchFilters.fromCity && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex justify-between items-center mb-8">

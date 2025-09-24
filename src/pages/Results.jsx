@@ -58,7 +58,6 @@ class ResultsErrorBoundary extends React.Component {
   }
 }
 
-// Sample data for buses (compatible with BookingList component)
 const sampleBusBookings = [
   {
     id: 1,
@@ -86,57 +85,225 @@ const sampleBusBookings = [
     }
   },
   {
-    id: 2,
-    type: "bus",
-    company: "Easy Coach",
-    route: "Nairobi to Mombasa",
-    price: 1800,
-    departure: "08:00",
-    arrival: "14:00",
-    seatsAvailable: 24,
-    image: "/images/Easycoach2.jpg",
-    schedule: {
-      departure_time: "08:00",
-      arrival_time: "14:00",
-      origin: "Nairobi",
-      destination: "Mombasa",
-      seat_map: {
-        seats: [
-          { number: "1A", is_available: true, class: "premium", position: "window" },
-          { number: "1B", is_available: true, class: "premium", position: "aisle" },
-          { number: "2A", is_available: false, class: "premium", position: "window" },
-          { number: "2B", is_available: true, class: "premium", position: "aisle" },
-        ]
+      id: 2,
+      type: "bus",
+      company: "Easy Coach",
+      route: "Nairobi to Kakamega",
+      price: 2200,
+      departure: "10:00",
+      arrival: "18:00",
+      seatsAvailable: 12,
+      image: "/images/Easycoach2.jpg",
+      rating: 4.2,
+      amenities: ["Wi-Fi", "AC", "Extra Legroom"],
+      schedule: {
+        departure_time: "10:00",
+        arrival_time: "16:00",
+        origin: "Nairobi",
+        destination: "Mombasa",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "premium", position: "window" },
+            { number: "1B", is_available: true, class: "premium", position: "aisle" },
+            { number: "2A", is_available: false, class: "premium", position: "window" },
+            { number: "2B", is_available: true, class: "premium", position: "aisle" },
+          ]
+        }
       }
-    }
-  },
-  {
-    id: 3,
-    type: "shuttle",
-    company: "Dreamline",
-    route: "Nairobi to Kisumu",
-    price: 1200,
-    departure: "07:30",
-    arrival: "12:00",
-    seatsAvailable: 14,
-    image: "/images/Dreamline.jpg",
-    schedule: {
-      departure_time: "07:30",
-      arrival_time: "12:00",
-      origin: "Nairobi",
-      destination: "Kisumu",
-      seat_map: {
-        seats: [
-          { number: "1A", is_available: true, class: "standard", position: "window" },
-          { number: "1B", is_available: true, class: "standard", position: "aisle" },
-          { number: "2A", is_available: true, class: "standard", position: "window" },
-          { number: "2B", is_available: false, class: "standard", position: "aisle" },
-        ]
+    },
+    {
+      id: 3,
+      type: "shuttle",
+      company: "Prestige",
+      route: "Nairobi to Kisumu",
+      price: 2000,
+      departure: "07:30",
+      arrival: "12:00",
+      seatsAvailable: 8,
+      image: "/images/presige.jpg",
+      rating: 4.7,
+      amenities: ["AC", "Charging Ports"],
+      schedule: {
+        departure_time: "07:30",
+        arrival_time: "13:00",
+        origin: "Nairobi",
+        destination: "Kisumu",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "standard", position: "window" },
+            { number: "1B", is_available: true, class: "standard", position: "aisle" },
+            { number: "2A", is_available: true, class: "standard", position: "window" },
+            { number: "2B", is_available: false, class: "standard", position: "aisle" },
+          ]
+        }
       }
-    }
-  }
-];
+    },
+        {
+      id: 4,
+      type: "shuttle",
+      company: "The Guardian",
+      route: "Nairobi to Eldoret",
+      price: 1300,
+      departure: "10:30",
+      arrival: "16:00",
+      seatsAvailable: 8,
+      image: "/images/Guardian.jpg",
+      rating: 4.7,
+      amenities: ["AC", "Charging Ports"],
+      schedule: {
+        departure_time: "07:30",
+        arrival_time: "12:00",
+        origin: "Nairobi",
+        destination: "Kisumu",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "standard", position: "window" },
+            { number: "1B", is_available: true, class: "standard", position: "aisle" },
+            { number: "2A", is_available: true, class: "standard", position: "window" },
+            { number: "2B", is_available: false, class: "standard", position: "aisle" },
+          ]
+        }
+      }
+    },
+    {
+      id: 5,
+      type: "luxury bus",
+      company: "Modern Coast",
+      route: "Nairobi to Malindi",
+      price: 2500,
+      departure: "09:30",
+      arrival: "15:30",
+      seatsAvailable: 18,
+      image: "/images/ModernCoast.jpg",
+      rating: 4.8,
+      amenities: ["Wi-Fi", "AC", "Charging Ports", "Entertainment", "Meals"],
+      schedule: {
+        departure_time: "09:30",
+        arrival_time: "18:30",
+        origin: "Nairobi",
+        destination: "Mombasa",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "premium", position: "window" },
+            { number: "1B", is_available: true, class: "premium", position: "aisle" },
+            { number: "2A", is_available: false, class: "premium", position: "window" },
+            { number: "2B", is_available: true, class: "premium", position: "aisle" },
+          ]
+        }
+      }
+     },
+     {
+      id: 6,
+      type: "train",
+      company: "Madaraka Express",
+      route: "Nairobi to Mombasa",
+      price: 3000,
+      departure: "08:00",
+      arrival: "14:30",
+      seatsAvailable: 42,
+      image: "/images/Madaraka express.jpg",
+      rating: 4.9,
+      amenities: ["Wi-Fi", "AC", "Dining Car", "Spacious Seats", "Power Outlets", "Scenic Views"],
+      schedule: {
+        departure_time: "08:00",
+        arrival_time: "14:30",
+        origin: "Nairobi",
+        destination: "Mombasa",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "first", position: "window" },
+            { number: "1B", is_available: true, class: "first", position: "aisle" },
+            { number: "2A", is_available: false, class: "first", position: "window" },
+            { number: "2B", is_available: true, class: "first", position: "aisle" },
+          ]
+        }
+      }
+    },
 
+    {
+      id: 7,
+      type: "airline",
+      company: "Kenya Airways",
+      route: "Nairobi to Mombasa",
+      price: 7500,
+      departure: "07:15",
+      arrival: "08:15",
+      seatsAvailable: 32,
+      image: "/images/Kenyaair.jpg",
+      rating: 4.6,
+      amenities: ["In-flight Entertainment", "Meals", "Priority Boarding", "Extra Legroom", "Business Class"],
+      schedule: {
+        departure_time: "07:15",
+        arrival_time: "08:15",
+        origin: "Nairobi (JKIA)",
+        destination: "Mombasa (MBA)",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "business", position: "window" },
+            { number: "1B", is_available: true, class: "business", position: "aisle" },
+            { number: "2A", is_available: false, class: "economy", position: "window" },
+            { number: "2B", is_available: true, class: "economy", position: "aisle" },
+          ]
+        }
+      }
+    },
+
+    {
+      id: 8,
+      type: "airline",
+      company: "Jumbojet",
+      route: "Nairobi to Kisumu",
+      price: 5200,
+      departure: "10:45",
+      arrival: "11:40",
+      seatsAvailable: 28,
+      image: "/images/jumbojet.jpg",
+      rating: 4.3,
+      amenities: ["AC", "Snacks", "On-time Guarantee", "Friendly Staff"],
+      schedule: {
+        departure_time: "10:45",
+        arrival_time: "11:40",
+        origin: "Nairobi (Wilson)",
+        destination: "Kisumu (KIS)",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "economy", position: "window" },
+            { number: "1B", is_available: true, class: "economy", position: "aisle" },
+            { number: "2A", is_available: false, class: "economy", position: "window" },
+            { number: "2B", is_available: true, class: "economy", position: "aisle" },
+          ]
+        }
+      }
+    },
+    {
+      id: 9,
+      type: "train",
+      company: "Lunatic Express",
+      route: "Nairobi to Kisumu",
+      price: 1500,
+      departure: "19:00",
+      arrival: "09:00+1",
+      seatsAvailable: 16,
+      image: "/images/LunaticExpress.jpg",
+      rating: 4.0,
+      amenities: ["Sleeper Cabins", "Dining Car", "Historic Experience", "Observation Deck"],
+      schedule: {
+        departure_time: "19:00",
+        arrival_time: "09:00",
+        origin: "Nairobi",
+        destination: "Mombasa",
+        seat_map: {
+          seats: [
+            { number: "1A", is_available: true, class: "sleeper", position: "window" },
+            { number: "1B", is_available: true, class: "sleeper", position: "aisle" },
+            { number: "2A", is_available: false, class: "sleeper", position: "window" },
+            { number: "2B", is_available: true, class: "sleeper", position: "aisle" },
+          ]
+        }
+      }
+     }
+  ];
+  
 const Cities = [
   "Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret", "Thika", "Malindi", "Kitale", 
   "Garissa", "Kakamega", "Nyeri", "Machakos", "Meru", "Lamu", "Voi", "Naivasha", "Nanyuki", "Embu"
@@ -162,14 +329,17 @@ const ResultsComponent = ({ searchData }) => {
   const [priceRange, setPriceRange] = useState([0, 10000]);
   const [selectedOperators, setSelectedOperators] = useState([]);
 
-  // Get search data from props or sessionStorage
+    // Get all unique operators from sample data
+  const allOperators = [...new Set(sampleBusBookings.map(booking => booking.company))];
+
+  // search data from props or sessionStorage
   const getSearchData = useCallback(() => {
     try {
       if (searchData) {
         return searchData;
       }
       
-      // get sessionStorage if not in props
+      // get sessionStorage 
       const storedData = sessionStorage.getItem('searchData');
       return storedData ? JSON.parse(storedData) : null;
     } catch (err) {
@@ -179,21 +349,54 @@ const ResultsComponent = ({ searchData }) => {
     }
   }, [searchData]);
 
+  // route filtering function
+  const doesRouteMatch = (route, from, to) => {
+    if (!route || !from || !to) return false;
+    
+    const routeParts = route.toLowerCase().split(' to ');
+    if (routeParts.length !== 2) return false;
+    
+    const routeFrom = routeParts[0].trim();
+    const routeTo = routeParts[1].trim();
+    
+    return routeFrom === from.toLowerCase() && routeTo === to.toLowerCase();
+  };
+
+  // Helper function to convert time string to minutes
+  const convertTimeToMinutes = useCallback((timeStr) => {
+    if (!timeStr) return 0;
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours * 60 + minutes;
+  }, []);
+
   // Search function
   const handleSearch = useCallback(() => {
     setLoading(true);
     setError(null);
     
-    // Simulating API call delay
-    setTimeout(() => {
-      try {
-        // For buses tab, use the sample bus data that's compatible with BookingList
+      // API call delay
+      setTimeout(() => {
+          try {
         let results = [];
-        
+
+        // Helper function to calculate duration
+        const calculateDuration = (departure, arrival) => {
+          if (!departure || !arrival) return 0;
+          
+          const depMinutes = convertTimeToMinutes(departure);
+          const arrMinutes = convertTimeToMinutes(arrival);
+          
+          // Handle overnight trips
+          if (arrMinutes < depMinutes) {
+            return (24 * 60 - depMinutes) + arrMinutes;
+          }
+          
+          return arrMinutes - depMinutes;
+        };
+
         if (activeTab === 'buses') {
           results = sampleBusBookings.filter(booking => 
-            booking.route.includes(fromCity) && 
-            booking.route.includes(toCity) &&
+            doesRouteMatch(booking.route, fromCity, toCity) &&
             booking.price >= priceRange[0] &&
             booking.price <= priceRange[1]
           );
@@ -204,14 +407,26 @@ const ResultsComponent = ({ searchData }) => {
             );
           }
         } else {
-          // For flights and trains, use the original logic (though BookingList won't be used)
           results = [];
         }
 
         // Sort results with safety checks
         results.sort((a, b) => {
-          const aValue = a[sortBy] || 0;
-          const bValue = b[sortBy] || 0;
+          let aValue, bValue;
+          
+          if (sortBy === 'departure') {
+            // Convert time to minutes for proper comparison
+            aValue = convertTimeToMinutes(a.departure);
+            bValue = convertTimeToMinutes(b.departure);
+          } else if (sortBy === 'duration') {
+            // Calculate duration in minutes
+            aValue = calculateDuration(a.departure, a.arrival);
+            bValue = calculateDuration(b.departure, b.arrival);
+          } else {
+            // Default to price
+            aValue = a.price || 0;
+            bValue = b.price || 0;
+          }
           
           if (sortOrder === 'asc') {
             return aValue > bValue ? 1 : -1;
@@ -230,7 +445,7 @@ const ResultsComponent = ({ searchData }) => {
         setLoading(false);
       }
     }, 800);
-  }, [activeTab, fromCity, toCity, priceRange, selectedOperators, sortBy, sortOrder]);
+  }, [activeTab, fromCity, toCity, priceRange, selectedOperators, sortBy, sortOrder, convertTimeToMinutes]);
 
   // Initializing search data
   useEffect(() => {
@@ -238,12 +453,19 @@ const ResultsComponent = ({ searchData }) => {
       const currentSearchData = getSearchData();
       
       if (currentSearchData) {
-        // Use the search data from the home page
+        // Use of search data from the home page
         setActiveTab(currentSearchData.transportType || 'buses');
         setFromCity(currentSearchData.fromCity || 'Nairobi');
         setToCity(currentSearchData.toCity || 'Mombasa');
         setPassengers(currentSearchData.passengers || 1);
         setDepartureDate(currentSearchData.departureDate || '');
+
+       // Trigger search after setting state
+        setTimeout(() => {
+          handleSearch();
+          setInitialLoad(false);
+        }, 100);
+
       } else {
         // No search data, redirect to home after a delay
         const timer = setTimeout(() => {
@@ -256,15 +478,14 @@ const ResultsComponent = ({ searchData }) => {
       setError('Failed to initialize search. Please try again.');
       setLoading(false);
     }
-  }, [getSearchData, navigate]);
+  }, [getSearchData, navigate, handleSearch]);
 
-  // State change - search
+  // Handle filter changes
   useEffect(() => {
-    if (initialLoad) {
+    if (!initialLoad) {
       handleSearch();
-      setInitialLoad(false);
     }
-  }, [fromCity, toCity, activeTab, handleSearch, initialLoad]);
+  }, [fromCity, toCity, activeTab, priceRange, selectedOperators, sortBy, sortOrder, handleSearch, initialLoad]);
 
   // Handle new search from results page
   const handleNewSearch = () => {
@@ -283,6 +504,14 @@ const ResultsComponent = ({ searchData }) => {
     } else {
       setSelectedOperators([...selectedOperators, operatorName]);
     }
+  };
+
+  // Reset all filters
+  const resetFilters = () => {
+    setPriceRange([0, 10000]);
+    setSelectedOperators([]);
+    setSortBy('price');
+    setSortOrder('asc');
   };
 
   const formatCurrency = (amount) => {
@@ -431,13 +660,14 @@ const ResultsComponent = ({ searchData }) => {
             </div>
           </div>
 
-          {/* Filters and Sorting */}
+                      {/* Filters and Sorting */}
           <div className="bg-gray-50 p-4 rounded-lg mb-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Price Range: {formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}
+                </label>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm">{formatCurrency(priceRange[0])}</span>
                   <input
                     type="range"
                     min="0"
@@ -449,7 +679,6 @@ const ResultsComponent = ({ searchData }) => {
                       setPriceRange([priceRange[0], parseInt(e.target.value)]);
                     }}
                   />
-                  <span className="text-sm">{formatCurrency(priceRange[1])}</span>
                 </div>
               </div>
 
@@ -477,42 +706,36 @@ const ResultsComponent = ({ searchData }) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Operators</label>
-                <div className="flex flex-wrap gap-2">
-                  {activeTab === 'buses' && (
-                    <>
-                      <button
-                        className={`px-3 py-1 text-sm rounded-full ${selectedOperators.includes('Tahmeed') ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                        onClick={() => toggleOperator('Tahmeed')}
-                      >
-                        Tahmeed
-                      </button>
-                      <button
-                        className={`px-3 py-1 text-sm rounded-full ${selectedOperators.includes('Easy Coach') ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                        onClick={() => toggleOperator('Easy Coach')}
-                      >
-                        Easy Coach
-                      </button>
-                      <button
-                        className={`px-3 py-1 text-sm rounded-full ${selectedOperators.includes('Dreamline') ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                        onClick={() => toggleOperator('Dreamline')}
-                      >
-                        Dreamline
-                      </button>
-                    </>
-                  )}
+                <div className="flex flex-wrap gap-2 max-h-20 overflow-y-auto">
+                  {activeTab === 'buses' && allOperators.map(operator => (
+                    <button
+                      key={operator}
+                      className={`px-3 py-1 text-sm rounded-full ${selectedOperators.includes(operator) ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      onClick={() => toggleOperator(operator)}
+                    >
+                      {operator}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
+          </div>
+
             
-            <div className="mt-4 flex justify-end">
+          {/* No results message */}
+          {!loading && searchResults.length === 0 && (
+            <div className="text-center py-8 bg-yellow-50 rounded-lg">
+              <div className="text-5xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">No trips found</h3>
+              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters.</p>
               <button
-                className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition duration-300"
-                onClick={handleSearch}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                onClick={resetFilters}
               >
-                Apply Filters
+                Reset All Filters
               </button>
             </div>
-          </div>
+          )}
 
           {/* Loading State */}
           {loading && (
@@ -523,13 +746,11 @@ const ResultsComponent = ({ searchData }) => {
           )}
 
           {/* Results List */}
-          {!loading && (
+          {!loading && searchResults.length > 0 && (
             <div className="space-y-4">
               {activeTab === 'buses' ? (
-                // Use BookingList component for buses
                 <BookingList bookings={searchResults} />
               ) : (
-                // For flights and trains, show a message
                 <div className="text-center py-8">
                   <div className="text-5xl mb-4">🚧</div>
                   <h3 className="text-xl font-semibold text-gray-700 mb-2">
@@ -546,7 +767,7 @@ const ResultsComponent = ({ searchData }) => {
   );
 };
 
-// Wrap the component with the error boundary
+// component under Error Boundary
 const Results = (props) => (
   <ResultsErrorBoundary>
     <ResultsComponent {...props} />
