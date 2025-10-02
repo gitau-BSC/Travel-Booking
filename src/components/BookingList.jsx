@@ -351,16 +351,16 @@ const BookingList = ({ bookings }) => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Filter and Sort Controls */}
-      <div className="bg-white rounded-xl shadow-sm p-4 flex flex-wrap gap-4 items-center justify-between">
+      <div className="bg-white rounded-xl shadow-sm p-6 flex flex-wrap gap-4 items-center justify-between">
         <div className="flex flex-wrap gap-4">
           <div className="flex items-center">
             <span className="text-gray-600 mr-2 font-medium">Filter:</span>
             <select 
               value={filterBy} 
               onChange={(e) => setFilterBy(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">All Transport</option>
               <option value="bus">Buses</option>
@@ -376,7 +376,7 @@ const BookingList = ({ bookings }) => {
             <select 
               value={sortBy} 
               onChange={(e) => setSortBy(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="price">Price (Low to High)</option>
               <option value="departure">Departure Time</option>
@@ -408,40 +408,45 @@ const BookingList = ({ bookings }) => {
         };
 
         return (
-          <div key={booking.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100">
+          <div key={booking.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 mx-2 sm:mx-0">
             <div className="md:flex">
-              <div className="md:w-1/4 relative">
-                <img 
-                  src={booking.image} 
-                  alt={booking.company}
-                  className="w-full h-48 object-cover"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop";
-                  }}
-                />
-                <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
-                  {getTypeIcon(booking.type)} <span className="ml-1">{booking.type}</span>
-                </div>
-
-                {booking.seatsAvailable < 10 && (
-                  <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                    Almost Full!
+              {/* Image Section */}
+              <div className="md:w-1/4 relative p-4">
+                <div className="relative rounded-lg overflow-hidden h-48">
+                  <img 
+                    src={booking.image} 
+                    alt={booking.company}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop";
+                    }}
+                  />
+                  
+                  <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
+                    {getTypeIcon(booking.type)} <span className="ml-1">{booking.type}</span>
                   </div>
-                )}
 
-                {/* Peak Type Badge */}
-                <div className="absolute bottom-3 left-3">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${peakConfig[peakType].color}`}>
-                    {peakConfig[peakType].label}
-                  </span>
+                  {booking.seatsAvailable < 10 && (
+                    <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                      Almost Full!
+                    </div>
+                  )}
+
+                  {/* Peak Type Badge */}
+                  <div className="absolute bottom-3 left-3">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${peakConfig[peakType].color}`}>
+                      {peakConfig[peakType].label}
+                    </span>
+                  </div>
                 </div>
               </div>
               
+              {/* Content Section */}
               <div className="p-6 md:w-3/4">
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900">{booking.company}</h3>
-                    <p className="text-gray-600 flex items-center">
+                    <p className="text-gray-600 flex items-center mt-1">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

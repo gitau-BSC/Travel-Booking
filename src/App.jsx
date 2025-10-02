@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Styles from "./style";
 import { Navbar, Footer, LoadingSpinner } from "./components";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Results from "./pages/Results";
@@ -18,7 +18,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [searchData, setSearchData] = useState(null);
   const location = useLocation();
-
   // Scroll to route page
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,15 +30,15 @@ function App() {
   }, [location]);
 
   // Handle search from Home page
-  const handleSearch = (data) => {
-    setSearchData(data);
+  const handleSearch = (searchData, trips) => {
+    setSearchData(searchData, trips);
   };
 
   return (
     <ReservationProvider>
       <div className="min-h-screen bg-gray-50">
         {/* Navbar section */}
-        <div className={`${Styles.paddingX} ${Styles.flexCenter}`}>
+        <div className={`${Styles.flexCenter}`}>
           <div className={`${Styles.boxWidth}`}>
             <Navbar />
           </div>
@@ -60,7 +59,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/seats" element={<SeatMap />} />
-          <Route path="/bookings" element={<BookingList />} />
+          
+        
         </Routes>
         
         {/* Footer */}
