@@ -1,8 +1,8 @@
 import { FaWifi, FaPlug, FaUserShield, FaCouch, FaFilm,FaSnowflake, FaFacebook, FaLinkedinIn } from 'react-icons/fa';
 import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
-import DreamlineLogo from '../assets/dreamline.png';
+import DreamlineLogo from '../assets/Dreamline.png';
 import SwiftShuttlesLogo from '../assets/swift.png';
-import EasyCoachLogo from '../assets/easycoach.jpg';
+import EasyCoachLogo from '../assets/Easycoach.jpg';
 import ModernCoastLogo from '../assets/moderncoast.png';
 export const navLinks = [
   {
@@ -142,7 +142,7 @@ export const footerLinks = [
     links: [
       {
         name: "About Us",
-        link: "/about-us",
+        link: "/about",
       },
       {
         name: "How it Works",
@@ -161,6 +161,10 @@ export const footerLinks = [
   {
     title: "Support",
     links: [
+      {
+        name: "Contact",
+        link: "/contact", 
+      },
       {
         name: "Help Center",
         link: "/help-center",

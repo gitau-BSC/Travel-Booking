@@ -1,4 +1,4 @@
-import Style from '../style';
+import { NavLink } from 'react-router-dom';
 import Logo from '../assets/logo-1.svg'; 
 import { footerLinks, socialMedia } from '../constants';
 
@@ -20,8 +20,19 @@ const Footer = () => {
               <h4 className="font-medium text-[18px] leading-[27px] text-white">{footerlink.title}</h4>
               <ul className="list-none mt-4">
                 {footerlink.links.map((link, index) => (
-                  <li key={link.name} className={`font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer ${index !== footerlink.links.length - 1 ? 'mb-4' : 'mb-0'}`}>
-                    {link.name}
+                  <li key={link.name} className={`${index !== footerlink.links.length - 1 ? 'mb-4' : 'mb-0'}`}>
+                    <NavLink 
+                      to={link.link}
+                      className={({ isActive }) => 
+                        `font-normal text-[16px] leading-[24px] transition-all duration-300 cursor-pointer ${
+                          isActive 
+                            ? 'text-secondary font-medium' 
+                            : 'text-dimWhite hover:text-secondary'
+                        }`
+                      }
+                    >
+                      {link.name}
+                    </NavLink>
                   </li>
                 ))}
               </ul>
@@ -37,12 +48,11 @@ const Footer = () => {
         
         <div className="flex flex-row md:mt-0 mt-6">
           {socialMedia.map((social, index) => {
-      
             const IconComponent = social.icon;
             return (
               <div
                 key={social.id}
-                className={`text-white text-xl cursor-pointer hover:text-secondary ${
+                className={`text-white text-xl cursor-pointer hover:text-secondary transition-colors duration-300 ${
                   index !== socialMedia.length - 1 ? 'mr-6' : 'mr-0'
                 }`}
                 onClick={() => window.open(social.link, '_blank')}
