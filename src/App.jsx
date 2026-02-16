@@ -8,12 +8,15 @@ import Details from "./pages/Details";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import TestSeatMapPage from "./pages/TestSeatMap";
+import { ReservationProvider } from './components/contexts/ReservationContext'; 
+import BookingList from "./components/BookingList"; 
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const [searchData, setSearchData] = useState(null);
   const location = useLocation();
 
-  // Scroll 
+  // Scroll to route page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -24,35 +27,43 @@ function App() {
     return () => clearTimeout(timer);
   }, [location]);
 
+  // Handle search from Home page
+  const handleSearch = (data) => {
+    setSearchData(data);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
-      <div className={`${Styles.paddingX} ${Styles.flexCenter}`}>
-        <div className={`${Styles.boxWidth}`}>
-          <Navbar />
+    <ReservationProvider>
+      <div className="min-h-screen bg-gray-50">
+        {/* Navbar section */}
+        <div className={`${Styles.paddingX} ${Styles.flexCenter}`}>
+          <div className={`${Styles.boxWidth}`}>
+            <Navbar />
+          </div>
+        </div>
+        
+        {/*loading indicator */}
+        {loading && <LoadingSpinner />}
+        
+        {/* Routes - pages */}
+        <Routes>
+          <Route path="/" element={<Home onSearch={handleSearch} />} />
+          <Route path="/results" element={<Results searchData={searchData} />} />
+          <Route path="/details/:id" element={<Details />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/test-seat-map" element={<TestSeatMapPage />} />
+          <Route path="/bookings" element={<BookingList />} />
+        </Routes>
+        
+        {/* Footer */}
+        <div className={`bg-primary ${Styles.paddingX} ${Styles.flexCenter}`}>
+          <div className={`${Styles.boxWidth}`}>
+            <Footer />
+          </div>
         </div>
       </div>
-      
-      {/*loading indicator */}
-      {loading && <LoadingSpinner />}
-      
-      {/* Routes - pages */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/details/:id" element={<Details />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/test-seat-map" element={<TestSeatMapPage />} />
-      </Routes>
-      
-      {/* Footer */}
-      <div className={`bg-primary ${Styles.paddingX} ${Styles.flexCenter}`}>
-        <div className={`${Styles.boxWidth}`}>
-          <Footer />
-        </div>
-      </div>
-    </div>
+    </ReservationProvider>
   );
 }
 
